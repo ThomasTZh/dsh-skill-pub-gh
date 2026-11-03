@@ -1,6 +1,6 @@
 ---
 name: pub-gh
-description: Prepare, publish, or update the current workspace project on GitHub as a minimal, reproducible research-code release. Use when asked to open-source, release, upload, or synchronize a project. Separate original work from modified third-party code and unmodified dependencies; preserve attribution and license obligations; remove private material; write a concise academic README; verify the release before a safe push or pull request.
+description: Prepare, publish, or update the current workspace project on GitHub as a minimal, reproducible research-code release. Use when asked to open-source, release, upload, or synchronize a project. Separate original work from modified third-party code and unmodified dependencies; preserve attribution and license obligations; remove private material; write a concise, evidence-based release README; verify the release before a safe push or pull request.
 compatibility: Requires workspace file access and Git. GitHub authentication and network access are required only for publishing; gh CLI is optional.
 ---
 
@@ -28,7 +28,7 @@ The publisher's defaults, learned from the `dsh-setup` repository. Apply them un
 
 - **Local first, GitHub second.** Build and verify the tree in a local checkout. The first remote operation is the push or pull request, after the checks pass and the user approves it. Never publish in order to find out whether it works.
 - **No snapshot dates.** No record date, no `snapshot:` field, no "as of" wording. Say what the release is and pin versions and commits; order a changelog newest-first rather than dating it.
-- **README in release shape.** Abstract, Composition (or Methods), Verification (or Results), Conclusion, Acknowledgements, References. One row per check that actually ran, then the untested items stated plainly.
+- **README in release shape.** Title, three-sentence abstract, purpose and gaps, features, non-goals and limitations, optional screenshots, reproduction environment, install and run, component layout table, results, acknowledgements, references, licenses. One row per check that actually ran, then the untested items stated plainly.
 - **Tables say name, path, contents.** Original files first, third-party records second. Do not repeat install destinations in the layout; the restore or install block owns them.
 - **One directory per component.** Every plugin, skill, and tool gets its own folder and its own README: what it does, how it is wired, its configuration, where it installs, and how to run its tests.
 - **Original only.** No upstream code, text, or binary in the tree. Credit each upstream project in `THIRD_PARTY.md` with its project, revision, licence, and what changed, even when nothing changed. Add a root `LICENSE`, MIT by default, covering only the original files and listing them.
@@ -78,6 +78,7 @@ project/
   config/example.*              # Safe placeholders, no credentials
   tests/                        # Small verification/smoke tests
   examples/                     # Synthetic or permission-cleared tiny examples
+  assets/                       # Screenshots and figures referenced by the README
 ```
 
 - Prefer pinned package manifests, build files, and reproducible dependency installation over committing completed upstream packages. Audit lockfiles for private URLs or embedded credentials.
@@ -95,24 +96,32 @@ Perform **all** checks before committing or uploading:
 - Stop and report blockers when a file has unknown ownership/licence, a required source-distribution condition cannot be met, there is suspected sensitive content in the history being pushed, or the destination is ambiguous.
 - If a secret was previously committed, **revoke or rotate it first**; removing a file from the working tree does not erase public history. Do not rewrite shared history automatically.
 
-### 5. Write academic-style documentation
+### 5. Write the README and attribution
 
-Use [assets/README.template.md](assets/README.template.md) as a starting point, following the [House style](#house-style) shape. Keep the prose brief, precise, and third-person or neutral; use short paragraphs, short bullets, and a small table where helpful. Preserve this structure:
+Use [assets/README.template.md](assets/README.template.md) as the starting point and follow the [House style](#house-style) shape. Write for a reader who has the hardware but none of the context: short paragraphs, one idea per bullet, neutral and precise wording, no marketing language. Delete any section that has nothing verified to say rather than filling it with placeholders. Keep this order:
 
-1. **Abstract:** problem, original contribution, method, intended use, one evidence-backed result if available.
-2. **Methods and Materials:** original vs upstream components, algorithm overview, hardware/software/OS/driver versions, installation, build, setup, exact reproduction commands, inputs/outputs, expected outputs, and limitations.
-3. **Results:** measured outcomes with units, dataset provenance, conditions, and corresponding evidence; label untested demonstrations as such.
-4. **Conclusion:** supported contribution and limitations; no exaggerated claims.
-5. **Acknowledgements:** upstream authors, projects, maintainers, relevant support and licensing notices.
-6. **References:** numbered linked citations for all reused methods, ideas, datasets, software, figures, and modified components, preferably DOI/paper + official repository/release and license links.
+1. **Title:** the project name. No badges, slogans, or version banners.
+2. **Abstract:** at most three sentences — what the repository contains, what it does, and the strongest verified fact. No citations and no implementation detail.
+3. **Purpose and gaps:** what the project is for, in one sentence, then the specific gap in existing tools, practice, or published work that motivates it, cited [1]. Describe the gap, not the product.
+4. **Features:** one bullet per capability that closes a stated gap, phrased as something a user can exercise and naming the entry point or command that provides it. Keep it short; drop roadmap items and duplicates.
+5. **Not for / limitations:** what the project deliberately does not do, plus the hardware, data, calibration, or licensing constraints that limit replication. State untested areas here instead of implying coverage.
+6. **Screenshots:** one or two images, only when they exist and show a real result, each captioned with what it demonstrates. Omit the section entirely when none exist; never ship a placeholder image. Review the images for identifying content before including them.
+7. **Reproduction environment:** table of operating system, language/compiler, hardware, pinned direct dependencies, and the input data with its provenance.
+8. **Install and run:** numbered, copy-pasteable commands for obtain, install, configure from example placeholders, and run, followed by the expected output — filename, shape, units, tolerance, or observable behaviour.
+9. **Layout:** one row per component with name, path, contents, and class — Original, Modified third-party, or Third-party. Third-party rows carry a version and a pointer to the upstream project, never copied source.
+10. **Results:** only measured outcomes — speed, memory, accuracy, or worked examples — each with conditions, units, and the command or test that produced it. Say plainly what was not run.
+11. **Acknowledgements:** upstream authors, projects, and maintainers whose work the release depends on or derives from.
+12. **References:** numbered citations for every reused method, dataset, figure, and component, with DOI or official URL, the pinned version or commit, and the licence link.
+13. **Licenses:** which licence covers the original files, where the third-party notices live, and anything the user must obtain separately.
 
-Keep README focused. Put detailed third-party attribution and patch reconstruction instructions in `THIRD_PARTY.md` (see [assets/THIRD_PARTY.template.md](assets/THIRD_PARTY.template.md)), then link to it from the README. Use `[1]`, `[2]`, etc. consistently; never use placeholder references in the published version. Include a `CITATION.cff` only with verified author/title/version metadata; cite the related paper when applicable. Set an appropriate `LICENSE` for code owned by the publisher after checking institutional/co-author ownership and upstream obligations. Do not guess licence choices.
+Keep the README focused and put detailed third-party attribution and patch reconstruction in `THIRD_PARTY.md` (see [assets/THIRD_PARTY.template.md](assets/THIRD_PARTY.template.md)), linked from the layout table. Use `[1]`, `[2]`, etc. consistently; never use placeholder references in the published version. Include a `CITATION.cff` only with verified author/title/version metadata; cite the related paper when applicable. Set an appropriate `LICENSE` for code owned by the publisher after checking institutional/co-author ownership and upstream obligations. Do not guess licence choices.
 
 ### 6. Verify from an independent perspective
 
 - In a fresh directory containing **only the release tree**, follow the README without using private workspace paths or hidden state.
 - Test installation/build/patch application, one short run, and a small deterministic comparison or smoke test. Capture the commands used and observations; do not put large generated artifacts in Git.
 - Verify documented versions, links, citations, license notices, markdown readability, and file inventory. `git diff --check` and a review of staged file names/content are mandatory before commit.
+- Confirm every README section is either present or deliberately omitted, that the layout table's Original / Modified third-party / Third-party classes match the publication manifest, and that each screenshot was reviewed for sensitive content.
 - If the needed hardware, datasets, or proprietary prerequisites are unavailable, perform all possible static and software checks; clearly record what remains **not tested**.
 - Produce a brief **release review**: included files, excluded categories, upstream component treatment, privacy/license findings, tests (pass/fail/not run), target repo/branch/visibility, and proposed changes to the remote.
 

@@ -1,21 +1,32 @@
 # <Project title>
 
-## Abstract
+<Three sentences at most: what this repository contains, what it does, and the strongest verified fact about it. No citations, no implementation detail.>
 
-- **Problem:** <One sentence defining the problem and scope.>
-- **Contribution:** <Precisely what is new in this repository.>
-- **Approach:** <Core technical method, with citations for prior work [1].>
-- **Evidence:** <One verified result with units and conditions, or state that quantitative validation is not available.>
+## Purpose and gaps
 
-## Methods and Materials
+<One sentence: what the project is for.>
 
-### Method
+- **Gap:** <the capability, evidence, or tooling that existing work does not provide, cited [1].>
+- **Approach:** <how this repository closes it, in one sentence.>
 
-- **Original components:** `<paths>` — <their roles>.
-- **Adapted components:** `<paths or patches>` — <what changed relative to [2]; full details in [THIRD_PARTY.md](THIRD_PARTY.md)>.
-- **Unmodified dependencies:** <versions and installation links; do not include their source>.
+## Features
 
-### Reproduction environment
+- <Capability a user can exercise — name the command, entry point, or file that provides it.>
+- <Keep one bullet per capability; drop roadmap items and duplicates.>
+
+## Not for / limitations
+
+- <What the project deliberately does not do.>
+- <Hardware, data, calibration, or licensing constraint that limits replication.>
+- <Anything not tested, stated plainly.>
+
+## Screenshots
+
+![<what the image demonstrates>](<relative path>)
+
+<Second image only if it adds information. Delete this section entirely when no verified screenshot exists; never ship a placeholder.>
+
+## Reproduction environment
 
 | Component | Requirement |
 | --- | --- |
@@ -23,37 +34,56 @@
 | Language/compiler | <version> |
 | Hardware | <model/interface; driver/firmware where applicable> |
 | Libraries | <direct dependencies with pinned versions> |
-| Input | <small synthetic/permission-cleared input and format> |
+| Input | <small synthetic or permission-cleared input, its format and provenance> |
 
-### Reproduction procedure
+## Install and run
 
-1. Obtain the repository and install the prerequisites listed above.
-2. <Exact verified build/install command.>
-3. <Exact verified command to obtain/apply permitted upstream changes if applicable.>
-4. <Exact verified run/test command.>
-5. Confirm <expected output filename, shape, units, numerical tolerance, or specific observable behaviour>.
+```bash
+# 1. Obtain
+<clone or release download command>
 
-> **Limitations:** <Hardware restrictions, unavailable assets, calibration requirements, and anything not tested.>
+# 2. Install
+<exact verified install command>
+
+# 3. Configure
+<copy example config to a local name; placeholders only, no credentials>
+
+# 4. Run
+<exact verified run or test command>
+```
+
+Expected output: <filename, shape, units, tolerance, or observable behaviour>.
+
+## Layout
+
+| Component | Path | Contents | Class |
+| --- | --- | --- | --- |
+| <name> | `<path>` | <what it contains> | Original |
+| <name> | `<path>` | <what changed relative to [2]> | Modified third-party |
+| <dependency name> | — | <upstream version and purpose; not copied> | Third-party |
+
+Third-party attribution, licences, and patch reconstruction are in [THIRD_PARTY.md](THIRD_PARTY.md).
 
 ## Results
 
 | Test / metric | Conditions | Result |
 | --- | --- | --- |
-| <Verified test> | <Hardware/software/input> | <Measured value and unit, or pass/fail> |
+| <verified test> | <hardware/software/input> | <measured value and unit, or pass/fail> |
 
-<One or two sentences interpreting only what the available evidence establishes. Cite external datasets/methods. If no result has been verified, state that rather than inventing one.>
-
-## Conclusion
-
-<One to three concise sentences summarising the supported original contribution, replication boundaries, and known limitations.>
+<One or two sentences interpreting only what the evidence establishes. Cite external datasets or methods [3]. If nothing was measured, say so rather than implying a result.>
 
 ## Acknowledgements
 
-- <Upstream author/project [1]: source and licensed contribution.>
-- <Upstream author/project [2]: changes derived from their work; preserve original copyright.>
-- See [THIRD_PARTY.md](THIRD_PARTY.md) for complete attribution, licensing and modifications.
+- <Upstream author/project [1]: what was used or changed; preserve original copyright.>
+- See [THIRD_PARTY.md](THIRD_PARTY.md) for complete attribution and modification records.
 
 ## References
 
-1. <Authors, title, venue/year or software/version, DOI or official URL, upstream repository, license link.>
-2. <Authors, title, venue/year or software/version, DOI or official URL, upstream repository, license link.>
+1. <Authors, title, venue/year or software/version, DOI or official URL, repository, licence link.>
+2. <Repeat for every reused method, dataset, figure, and component.>
+
+## Licenses
+
+- **Original files:** <licence name> — see [LICENSE](LICENSE), which lists the files it covers.
+- **Third-party components:** <licence names and where their notices live> — see [THIRD_PARTY.md](THIRD_PARTY.md).
+- **Obtained separately by the user:** <proprietary software, hardware, or restricted data, if any; otherwise delete this bullet.>
