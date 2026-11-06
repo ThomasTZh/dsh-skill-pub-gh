@@ -1,11 +1,11 @@
 # dsh-skill-pub-gh
 
-A skill and two templates for publishing a workspace to GitHub as a minimal,
-reproducible release. It classifies every file by origin and licence, runs
-privacy and licence gates, writes a release README whose claims are backed by
-checks, and verifies the tree before a push that needs explicit approval. The
-package is one instruction file plus a README template and an attribution
-template.
+This package holds short written instructions that help a person or an
+assistant publish a project on a public code-sharing website. It decides what
+may safely be shared, keeps proper credit for other people's work, and explains
+the project in words a newcomer can follow. The instructions are one main file
+plus two fill-in templates, and the result is checked before anything is
+uploaded.
 
 ## Purpose and gaps
 
@@ -31,6 +31,9 @@ Releasing a project is not the same as uploading its working directory.
 - **Release-shaped README template:** the 13-part structure the skill requires,
   from a three-sentence abstract to the licence section, with guidance for each
   part and an optional Screenshots section that this page omits.
+- **Plain-language opening:** the abstract and the repository description use
+  everyday words, with no technical terms, so a newcomer understands the project
+  on the first reading.
 - **Attribution template:** an upstream table and a compliance checklist for
   components that are patched, pinned, or only linked.
 - **Independent verification:** a fresh directory containing only the release

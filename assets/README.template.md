@@ -1,6 +1,6 @@
 # <Project title>
 
-<Three sentences at most: what this repository contains, what it does, and the strongest verified fact about it. No citations, no implementation detail.>
+<Three sentences at most, in plain language a non-specialist understands on the first reading: what this repository contains, what it does, and the strongest verified fact about it. No technical terms, jargon, acronyms, version numbers, function names, citations, or implementation detail. Use the same plain wording for the GitHub repository description.>
 
 ## Purpose and gaps
 

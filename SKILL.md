@@ -29,6 +29,7 @@ The publisher's defaults, learned from the `dsh-setup` repository. Apply them un
 - **Local first, GitHub second.** Build and verify the tree in a local checkout. The first remote operation is the push or pull request, after the checks pass and the user approves it. Never publish in order to find out whether it works.
 - **No snapshot dates.** No record date, no `snapshot:` field, no "as of" wording. Say what the release is and pin versions and commits; order a changelog newest-first rather than dating it.
 - **README in release shape.** Title, three-sentence abstract, purpose and gaps, features, non-goals and limitations, optional screenshots, reproduction environment, install and run, component layout table, results, acknowledgements, references, licenses. One row per check that actually ran, then the untested items stated plainly.
+- **Plain language on the surface.** The GitHub repository description and the README abstract are the two places a newcomer reads first. Write both in everyday words: no technical terms, jargon, acronyms, version numbers, function names, or product names. Someone with no technical background must understand what the project is and what it does after one reading.
 - **Tables say name, path, contents.** Original files first, third-party records second. Do not repeat install destinations in the layout; the restore or install block owns them.
 - **One directory per component.** Every plugin, skill, and tool gets its own folder and its own README: what it does, how it is wired, its configuration, where it installs, and how to run its tests.
 - **Original only.** No upstream code, text, or binary in the tree. Credit each upstream project in `THIRD_PARTY.md` with its project, revision, licence, and what changed, even when nothing changed. Add a root `LICENSE`, MIT by default, covering only the original files and listing them.
@@ -101,7 +102,7 @@ Perform **all** checks before committing or uploading:
 Use [assets/README.template.md](assets/README.template.md) as the starting point and follow the [House style](#house-style) shape. Write for a reader who has the hardware but none of the context: short paragraphs, one idea per bullet, neutral and precise wording, no marketing language. Delete any section that has nothing verified to say rather than filling it with placeholders. Keep this order:
 
 1. **Title:** the project name. No badges, slogans, or version banners.
-2. **Abstract:** at most three sentences — what the repository contains, what it does, and the strongest verified fact. No citations and no implementation detail.
+2. **Abstract:** at most three sentences in plain language: what the repository contains, what it does, and the strongest verified fact. Write for a reader with no technical background. No technical terms, jargon, acronyms, version numbers, function names, citations, or implementation detail; a non-specialist must understand every sentence on the first reading.
 3. **Purpose and gaps:** what the project is for, in one sentence, then the specific gap in existing tools, practice, or published work that motivates it, cited [1]. Describe the gap, not the product.
 4. **Features:** one bullet per capability that closes a stated gap, phrased as something a user can exercise and naming the entry point or command that provides it. Keep it short; drop roadmap items and duplicates.
 5. **Not for / limitations:** what the project deliberately does not do, plus the hardware, data, calibration, or licensing constraints that limit replication. State untested areas here instead of implying coverage.
@@ -122,6 +123,7 @@ Keep the README focused and put detailed third-party attribution and patch recon
 - Test installation/build/patch application, one short run, and a small deterministic comparison or smoke test. Capture the commands used and observations; do not put large generated artifacts in Git.
 - Verify documented versions, links, citations, license notices, markdown readability, and file inventory. `git diff --check` and a review of staged file names/content are mandatory before commit.
 - Confirm every README section is either present or deliberately omitted, that the layout table's Original / Modified third-party / Third-party classes match the publication manifest, and that each screenshot was reviewed for sensitive content.
+- Read the GitHub repository description and the README abstract as someone with no technical background. Remove technical terms, jargon, acronyms, version numbers, and function names; rewrite until a non-specialist understands both on the first reading.
 - If the needed hardware, datasets, or proprietary prerequisites are unavailable, perform all possible static and software checks; clearly record what remains **not tested**.
 - Produce a brief **release review**: included files, excluded categories, upstream component treatment, privacy/license findings, tests (pass/fail/not run), target repo/branch/visibility, and proposed changes to the remote.
 
@@ -131,6 +133,7 @@ Keep the README focused and put detailed third-party attribution and patch recon
 
 - **New repository:** initialise Git **in the clean publication tree**, stage explicit allowlisted paths (avoid `git add .`), review `git diff --cached` and history, commit, then use authenticated Git/`gh` to create the approved destination and push only the intended branch. Do not automatically choose public visibility.
 - **Existing repository:** fetch and inspect remote changes first; make an isolated branch from the correct default branch, apply the curated updates without overwriting unrelated work, review the diff, commit, push the branch, and prefer a pull request. Do not force-push, silently replace history, or modify protected branches.
+- **Repository description:** set or update it with `gh repo create --description "<text>"` or `gh repo edit --description "<text>"`. Use one sentence in the same plain language as the README abstract: no technical terms, jargon, acronyms, version numbers, or function names, clear to someone with no technical background.
 - Use informative commit messages identifying the novel change or release update. Do not create empty commits or update documentation with fabricated results.
 - After successful publication, verify the remote URL, branch/PR, visible file list, README links, licence notices, and absence of sensitive files. Report the actual outcome.
 
